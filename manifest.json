@@ -1,7 +1,7 @@
 {
     "name": "Pictionary App",
     "short_name": "Pictionary",
-    "start_url": "./",
+    "start_url": "index.html",
     "display": "standalone",
     "background_color": "#ffffff",
     "theme_color": "#000000",
@@ -10,7 +10,11 @@
             "src": "icon.png",
             "sizes": "200x200",
             "type": "image/png"
+        },
+        {
+            "src": "favicon.ico",
+            "sizes": "48x48",
+            "type": "image/x-icon"
         }
     ]
 }
-
