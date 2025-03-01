@@ -5,13 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pictionary App</title>
 
-    <!-- Favicon -->
     <link rel="icon" href="favicon.ico" type="image/x-icon">
-
-    <!-- Web App Manifest -->
     <link rel="manifest" href="manifest.json">
-
-    <!-- Service Worker -->
     <script>
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('service-worker.js')
@@ -19,12 +14,68 @@
             .catch(err => console.log('Error en Service Worker:', err));
         }
     </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        canvas {
+            border: 2px solid black;
+            cursor: crosshair;
+        }
+        .controls {
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Bienvenido a Pictionary App</h1>
-    <p>Esta es una aplicación progresiva (PWA).</p>
+    <h1>¡Bienvenido a Pictionary!</h1>
+    <p>Dibuja la palabra: <strong id="word"></strong></p>
+    <canvas id="canvas" width="400" height="400"></canvas>
+    <div class="controls">
+        <button onclick="clearCanvas()">Borrar</button>
+        <button onclick="newWord()">Nueva palabra</button>
+    </div>
+
+    <script>
+        const words = ["Gato", "Casa", "Sol", "Árbol", "Coche", "Pelota", "Montaña", "Mar"];
+        let canvas = document.getElementById("canvas");
+        let ctx = canvas.getContext("2d");
+        let drawing = false;
+        
+        function newWord() {
+            let randomIndex = Math.floor(Math.random() * words.length);
+            document.getElementById("word").textContent = words[randomIndex];
+        }
+        
+        function startDrawing(event) {
+            drawing = true;
+            ctx.beginPath();
+            ctx.moveTo(event.offsetX, event.offsetY);
+        }
+
+        function draw(event) {
+            if (!drawing) return;
+            ctx.lineTo(event.offsetX, event.offsetY);
+            ctx.stroke();
+        }
+
+        function stopDrawing() {
+            drawing = false;
+        }
+
+        function clearCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+
+        canvas.addEventListener("mousedown", startDrawing);
+        canvas.addEventListener("mousemove", draw);
+        canvas.addEventListener("mouseup", stopDrawing);
+        canvas.addEventListener("mouseleave", stopDrawing);
+
+        newWord(); // Mostrar una palabra al iniciar
+    </script>
 </body>
 </html>
-
 
 
