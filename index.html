@@ -3,110 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pictionary App</title>
-
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <title>Pictionary</title>
     <link rel="manifest" href="manifest.json">
-    <script>
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('service-worker.js')
-                .then(reg => console.log('Service Worker registrado:', reg))
-                .catch(err => console.log('Error en Service Worker:', err));
-            });
-        }
-    </script>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            background-color: #f4f4f4;
-        }
-        h1 {
-            margin-bottom: 10px;
-        }
-        p {
-            font-size: 18px;
-            font-weight: bold;
-        }
-        canvas {
-            border: 2px solid black;
-            background-color: white;
-            cursor: crosshair;
-            display: block;
-        }
-        .controls {
-            margin-top: 10px;
-        }
-        button {
-            padding: 10px 15px;
-            font-size: 16px;
-            margin: 5px;
-            cursor: pointer;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>¡Bienvenido a Pictionary!</h1>
-    <p>Dibuja la palabra: <strong id="word"></strong></p>
-    <canvas id="canvas" width="400" height="400"></canvas>
-    <div class="controls">
-        <button id="clearBtn">Borrar</button>
-        <button id="newWordBtn">Nueva palabra</button>
-    </div>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const words = ["Gato", "Casa", "Sol", "Árbol", "Coche", "Pelota", "Montaña", "Mar"];
-            let canvas = document.getElementById("canvas");
-            let ctx = canvas.getContext("2d");
-            let drawing = false;
-
-            function newWord() {
-                let randomIndex = Math.floor(Math.random() * words.length);
-                document.getElementById("word").textContent = words[randomIndex];
-            }
-
-            function startDrawing(event) {
-                drawing = true;
-                ctx.beginPath();
-                ctx.moveTo(event.offsetX, event.offsetY);
-            }
-
-            function draw(event) {
-                if (!drawing) return;
-                ctx.lineTo(event.offsetX, event.offsetY);
-                ctx.stroke();
-            }
-
-            function stopDrawing() {
-                drawing = false;
-            }
-
-            function clearCanvas() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-            }
-
-            // Eventos del canvas
-            canvas.addEventListener("mousedown", startDrawing);
-            canvas.addEventListener("mousemove", draw);
-            canvas.addEventListener("mouseup", stopDrawing);
-            canvas.addEventListener("mouseleave", stopDrawing);
-
-            // Eventos de botones
-            document.getElementById("clearBtn").addEventListener("click", clearCanvas);
-            document.getElementById("newWordBtn").addEventListener("click", newWord);
-
-            newWord(); // Mostrar una palabra al iniciar
-        });
-    </script>
+    <h1>Pictionary</h1>
+    <p>¡Dibuja la siguiente palabra en un papel!</p>
+    <h2 id="word">...</h2>
+    <p>Tiempo restante: <span id="timer">60</span> segundos</p>
+    <button id="start-button">Nueva palabra</button>
+    <audio id="countdown-sound" src="countdown.mp3"></audio>
+    
+    <script src="script.js"></script>
 </body>
 </html>
 
