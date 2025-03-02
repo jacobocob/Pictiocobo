@@ -1,36 +1,66 @@
+/* Estilos generales */
 body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    background-color: #f4f4f4;
-    padding: 20px;
-}
-
-h1 {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
     color: #333;
+    text-align: center;
+    margin: 0;
+    padding: 0;
 }
 
-h2 {
-    font-size: 24px;
+/* Contenedor principal */
+.container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Título */
+h1 {
+    font-size: 2rem;
+    color: #ff4081;
+}
+
+/* Texto de instrucciones */
+.instruction {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+/* Palabra a dibujar */
+.word-display {
+    font-size: 2rem;
     font-weight: bold;
-    margin: 10px 0;
+    color: #1976d2;
 }
 
-#timer {
-    font-size: 20px;
+/* Temporizador */
+.timer-text {
+    font-size: 1.2rem;
+}
+
+.timer {
+    font-size: 1.5rem;
     font-weight: bold;
-    color: red;
+    color: #d32f2f;
 }
 
-button {
-    background-color: #28a745;
+/* Botón de inicio */
+.start-button {
+    background: #ff4081;
     color: white;
     border: none;
     padding: 10px 20px;
-    font-size: 16px;
+    font-size: 1.2rem;
+    border-radius: 5px;
     cursor: pointer;
-    margin-top: 10px;
+    transition: background 0.3s ease;
 }
 
-button:hover {
-    background-color: #218838;
+.start-button:hover {
+    background: #d81b60;
 }
+

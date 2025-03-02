@@ -1,36 +1,48 @@
-const words = ["Perro", "Gato", "Montaña", "Pizza", "Bicicleta", "León", "Avión", "Cactus"];
-const timerDisplay = document.getElementById("timer");
-const wordDisplay = document.getElementById("word");
-const startButton = document.getElementById("start-button");
+const words = {
+    lugares: ["Playa", "Montaña", "Castillo", "Escuela", "Museo"],
+    animales: ["Elefante", "Tiburón", "León", "Gato", "Mariposa"],
+    comidas: ["Pizza", "Sushi", "Manzana", "Tarta", "Helado"],
+    objetos: ["Teléfono", "Reloj", "Gafas", "Libro", "Lámpara"]
+};
+
+let timerInterval;
 const countdownSound = document.getElementById("countdown-sound");
 
-let countdown;
-let timeLeft = 60;
+function getRandomWord() {
+    const categories = Object.keys(words);
+    const randomCategory = categories[Math.floor(Math.random() * categories.length)];
+    const randomWord = words[randomCategory][Math.floor(Math.random() * words[randomCategory].length)];
+    return randomWord;
+}
 
 function startGame() {
-    // Escoge una palabra al azar
-    wordDisplay.textContent = words[Math.floor(Math.random() * words.length)];
-    
-    // Reinicia el temporizador
-    clearInterval(countdown);
-    timeLeft = 60;
-    timerDisplay.textContent = timeLeft;
-    
-    countdown = setInterval(() => {
-        timeLeft--;
-        timerDisplay.textContent = timeLeft;
+    // Reiniciar la palabra y el tiempo
+    document.getElementById("word").textContent = getRandomWord();
+    let timeLeft = 60;
+    document.getElementById("timer").textContent = timeLeft;
 
-        // Reproduce sonido en los últimos 10 segundos
+    // Limpiar cualquier temporizador anterior
+    clearInterval(timerInterval);
+
+    // Iniciar la cuenta regresiva
+    timerInterval = setInterval(() => {
+        timeLeft--;
+        document.getElementById("timer").textContent = timeLeft;
+
+        // Reproducir sonido en los últimos 10 segundos
         if (timeLeft === 10) {
             countdownSound.play();
         }
 
+        // Detener el temporizador al llegar a 0
         if (timeLeft <= 0) {
-            clearInterval(countdown);
-            timerDisplay.textContent = "¡Tiempo terminado!";
+            clearInterval(timerInterval);
+            alert("¡Tiempo agotado!");
         }
     }, 1000);
 }
 
-// Agregar evento al botón
-startButton.addEventListener("click", startGame);
+// Iniciar el juego al cargar la página
+document.addEventListener("DOMContentLoaded", () => {
+    startGame();
+});
