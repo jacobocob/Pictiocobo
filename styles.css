@@ -20,7 +20,8 @@ body {
 
 /* Título */
 h1 {
-    font-size: 2rem;
+    font-size: 3rem;
+    font-weight: bold;
     color: #ff4081;
 }
 
@@ -32,14 +33,14 @@ h1 {
 
 /* Palabra a dibujar */
 .word-display {
-    font-size: 2rem;
+    font-size: 3rem;
     font-weight: bold;
     color: #1976d2;
 }
 
 /* Temporizador */
 .timer-text {
-    font-size: 1.2rem;
+    font-size: 4rem;
 }
 
 .timer {

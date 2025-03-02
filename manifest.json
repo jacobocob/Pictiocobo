@@ -1,6 +1,6 @@
 {
-    "name": "Pictionary App",
-    "short_name": "Pictionary",
+    "name": "Pictio Cobo App",
+    "short_name": "Pictiocobo",
     "start_url": "index.html",
     "display": "standalone",
     "background_color": "#ffffff",
